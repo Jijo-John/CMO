@@ -27,8 +27,6 @@ const config: Config = {
         facebook: '#1877F2',
         twitter: '#000000',
         youtube: '#FF0000',
-        pinterest: '#E60023',
-        tiktok: '#000000',
       },
     },
   },

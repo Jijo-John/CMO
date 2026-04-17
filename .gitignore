@@ -14,23 +14,44 @@ out/
 .env.local
 .env.*
 
-# Logs
-*.log
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
 # IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Python artifacts (if any Python parts exist)
+# Logs
+*.log
+
+# Temp files
+*.tmp
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.rar
+*.7z
 ```

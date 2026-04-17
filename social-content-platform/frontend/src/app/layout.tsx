@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '../globals.css';
+import './globals.css';
+import { AuthProvider } from '@/context/AuthContext';
+import { BusinessProvider } from '@/context/BusinessContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Social Content Platform - Manage Your Social Media Workflow',
-  description: 'Plan, create, review, and prepare social media content for manual publishing across multiple platforms.',
+  title: 'Social Content Manager',
+  description: 'Plan, create, and manage your social media content before posting',
 };
 
 export default function RootLayout({
@@ -16,7 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AuthProvider>
+          <BusinessProvider>
+            {children}
+          </BusinessProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

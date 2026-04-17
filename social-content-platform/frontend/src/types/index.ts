@@ -1,92 +1,82 @@
 export interface User {
   id: string;
   email: string;
-  fullName: string;
-  avatarUrl?: string;
+  name: string;
 }
 
 export interface Business {
   id: string;
   name: string;
-  logoUrl?: string;
-  ownerId: string;
-  role?: string;
-  joinedAt?: string;
+  logo: string | null;
+  owner_id: string;
+  role: 'owner' | 'admin' | 'creator' | 'reviewer' | 'viewer';
+  joined_at: string;
 }
 
 export interface Platform {
   id: string;
   name: string;
-  brandColor: string;
-  iconPlaceholder: string;
-  contentRules: {
-    maxChars?: number;
-    hashtagLimit?: number;
-    supportsVideo: boolean;
-    supportsImage: boolean;
-  };
+  brand_color: string;
+  icon_placeholder: string;
+  content_rules: string;
 }
 
 export interface Content {
   id: string;
-  businessId: string;
+  business_id: string;
   title: string;
-  caption?: string;
-  hashtags?: string[];
-  scheduledDate?: string;
-  status: 'draft' | 'review' | 'approved' | 'posted' | 'rejected';
-  createdBy: string;
-  creatorName?: string;
-  reviewedBy?: string;
-  reviewedAt?: string;
-  postedAt?: string;
-  rejectionReason?: string;
-  qualityScore?: number;
-  platforms?: ContentPlatform[];
-  media?: Media[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ContentPlatform {
-  id: string;
-  contentId: string;
-  platformId: string;
-  name: string;
-  brandColor: string;
-  iconPlaceholder: string;
-  captionOverride?: string;
-  hashtagsOverride?: string[];
-  isPosted: boolean;
-  postedAt?: string;
+  caption: string | null;
+  hashtags: string | null;
+  status: 'draft' | 'review' | 'approved' | 'posted';
+  scheduled_date: string | null;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+  creator_name?: string;
+  platforms: Platform[];
+  media: Media[];
+  mediaCount?: number;
 }
 
 export interface Media {
   id: string;
-  businessId: string;
-  fileName: string;
-  originalName: string;
-  filePath: string;
-  fileUrl: string;
-  fileType: 'image' | 'video';
-  mimeType: string;
-  fileSize: number;
-  width?: number;
-  height?: number;
-  duration?: number;
-  uploadedBy: string;
-  createdAt: string;
+  content_id: string;
+  filename: string;
+  original_name: string;
+  mime_type: string;
+  size: number;
+  url: string;
+  uploaded_at: string;
+  content_title?: string;
 }
 
-export interface AuthState {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
+export interface TeamMember {
+  id: string;
+  email: string;
+  name: string;
+  role: 'owner' | 'admin' | 'creator' | 'reviewer' | 'viewer';
+  joined_at: string;
 }
 
-export interface BusinessState {
-  businesses: Business[];
-  currentBusiness: Business | null;
+export interface ActivityLog {
+  id: string;
+  business_id: string;
+  user_id: string;
+  action: string;
+  entity_type: string | null;
+  entity_id: string | null;
+  details: string | null;
+  created_at: string;
+  user_name: string;
+  user_email: string;
 }
 
-export type UserRole = 'owner' | 'admin' | 'creator' | 'reviewer' | 'viewer';
+export type Role = 'owner' | 'admin' | 'creator' | 'reviewer' | 'viewer';
+
+export const ROLE_HIERARCHY: Record<Role, number> = {
+  owner: 5,
+  admin: 4,
+  reviewer: 3,
+  creator: 2,
+  viewer: 1,
+};
